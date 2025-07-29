@@ -1,12 +1,19 @@
 package com.litmus7.employeemanager.util;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class ValidationUtil {
 
-    // TODO: unique id check
+    private static ArrayList<Integer> ids = new ArrayList<>();
+
     public static boolean validateId(int id) {
-        return id > 0;
+        boolean duplicate = ids.contains(id);
+        if (!duplicate) {
+            ids.add(id);
+        }
+
+        return id > 0 && !duplicate;
     }
 
     public static boolean validateName(String name) {
