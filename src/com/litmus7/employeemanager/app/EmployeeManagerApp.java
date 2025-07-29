@@ -35,5 +35,7 @@ public class EmployeeManagerApp {
                     System.out.println("Invalid choice");
             }
         }
+
+        scanner.close();
     }
 }

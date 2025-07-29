@@ -104,7 +104,5 @@ public class EmployeeController {
         } else {
             System.out.println("Adding failed");
         }
-
-        sc.close();
     }
 }
