@@ -13,9 +13,8 @@ public class ValidationUtil {
         return !name.isBlank();
     }
 
-    // TODO: basic format check
     public static boolean validateEmail(String email) {
-        return !email.isBlank();
+        return email.matches("^((?!\\.)[\\w\\-_.]*[^.])(@\\w+)(.com)$") && !email.isBlank();
     }
 
     public static boolean validateMobileNo(Long number) {
