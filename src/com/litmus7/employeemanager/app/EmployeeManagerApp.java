@@ -41,7 +41,7 @@ public class EmployeeManagerApp {
                     }
                     break;
                 case 3:
-                    controller.readAndSaveDataFromUser("employees.csv");
+                    readAndSaveDataFromUser("employees.csv");
                     break;
                 case 4:
                     System.out.println("Exiting...");
@@ -54,63 +54,69 @@ public class EmployeeManagerApp {
         scanner.close();
     }
 
-    // private static void readAndSaveDataFromUser() {
-    //     Scanner sc = new Scanner(System.in);
+    private static void readAndSaveDataFromUser(String outputFile) {
+        Scanner sc = new Scanner(System.in);
 
-    //     int id = 0;
-    //     do {
-    //         System.out.print("Enter the ID: ");
-    //         try {
-    //             id = Integer.parseInt(sc.nextLine());
-    //         } catch (NumberFormatException e) {
-    //             System.out.println("ID should be a number");
-    //             continue;
-    //         }
-    //     } while (!ValidationUtil.validateId(id));
+        int id = 0;
+        do {
+            System.out.print("Enter the ID: ");
+            try {
+                id = Integer.parseInt(sc.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("ID should be a number");
+                continue;
+            }
+        } while (!ValidationUtil.validateId(id));
 
-    //     String firstName;
-    //     do {
-    //         System.out.print("Enter the first name: ");
-    //         firstName = sc.nextLine();
-    //     } while (!ValidationUtil.validateName(firstName));
+        String firstName;
+        do {
+            System.out.print("Enter the first name: ");
+            firstName = sc.nextLine();
+        } while (!ValidationUtil.validateName(firstName));
 
-    //     String lastName;
-    //     do {
-    //         System.out.print("Enter the last name: ");
-    //         lastName = sc.nextLine();
-    //     } while (!ValidationUtil.validateName(lastName));
+        String lastName;
+        do {
+            System.out.print("Enter the last name: ");
+            lastName = sc.nextLine();
+        } while (!ValidationUtil.validateName(lastName));
 
-    //     Long mobileNo = 0L;
-    //     do {
-    //         System.out.print("Enter the 10-digit mobile number: ");
-    //         try {
-    //             mobileNo = Long.parseLong(sc.nextLine());
-    //         } catch (NumberFormatException e) {
-    //             System.out.println("Mobile number should only consist of digits");
-    //             continue;
-    //         }
-    //     } while (!ValidationUtil.validateMobileNo(mobileNo));
+        Long mobileNo = 0L;
+        do {
+            System.out.print("Enter the 10-digit mobile number: ");
+            try {
+                mobileNo = Long.parseLong(sc.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Mobile number should only consist of digits");
+                continue;
+            }
+        } while (!ValidationUtil.validateMobileNo(mobileNo));
 
-    //     String email;
-    //     do {
-    //         System.out.print("Enter the email: ");
-    //         email = sc.nextLine();
-    //     } while (!ValidationUtil.validateEmail(email));
+        String email;
+        do {
+            System.out.print("Enter the email: ");
+            email = sc.nextLine();
+        } while (!ValidationUtil.validateEmail(email));
 
-    //     LocalDate joiningDate = null;
-    //     do {
-    //         System.out.print("Enter the joining date (YYYY-MM-DD): ");
-    //         try {
-    //             joiningDate = LocalDate.parse(sc.nextLine());
-    //         } catch (DateTimeParseException e) {
-    //             System.out.println("Invalid date");
-    //             continue;
-    //         }
-    //     } while (!ValidationUtil.validateJoiningDate(joiningDate));
+        LocalDate joiningDate = null;
+        do {
+            System.out.print("Enter the joining date (YYYY-MM-DD): ");
+            try {
+                joiningDate = LocalDate.parse(sc.nextLine());
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid date");
+                continue;
+            }
+        } while (!ValidationUtil.validateJoiningDate(joiningDate));
 
-    //     System.out.print("Is the employee active (true/false): ");
-    //     boolean activeStatus = Boolean.parseBoolean(sc.nextLine());
+        System.out.print("Is the employee active (true/false): ");
+        boolean activeStatus = Boolean.parseBoolean(sc.nextLine());
 
-    //     Employee emp = new Employee(id, firstName, lastName, mobileNo, email, joiningDate, activeStatus);
-    // }
+        Employee emp = new Employee(id, firstName, lastName, mobileNo, email, joiningDate, activeStatus);
+
+        if(controller.saveDataToCSV(outputFile, emp)) {
+            System.out.println("Data added to CSV file successfully");
+        } else {
+            System.out.println("Data adding failed");
+        }
+    }
 }
