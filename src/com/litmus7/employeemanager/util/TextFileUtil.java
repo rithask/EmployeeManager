@@ -16,7 +16,7 @@ import java.util.List;
 
 public class TextFileUtil {
 
-    public static String[] readFromTextFile(String filename) {
+    public static String[] readDataFromTextFile(String filename) {
         List<String> lines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
@@ -27,31 +27,6 @@ public class TextFileUtil {
             System.out.println("Reading failed!");
         }
         return lines.toArray(new String[lines.size()]);
-    }
-
-    public static Employee sanitizeDataFromTextFile(String data) {
-        String[] fields = data.split("\\$");
-
-        int id = Integer.parseInt(fields[0]);
-        String firstName = fields[1];
-        String lastName = fields[2];
-        long mobileNo = Long.parseLong(fields[3]);
-        String email = fields[4];
-        LocalDate joiningDate = LocalDate.parse(fields[5]);
-        boolean active = Boolean.parseBoolean(fields[6]);
-
-        Employee emp = new Employee(id, firstName, lastName, mobileNo, email, joiningDate, active);
-        return emp;
-    }
-
-    public static void printEmployeeData(Employee emp) {
-        System.out.println("ID:            " + emp.getId());
-        System.out.println("First name:    " + emp.getFirstName());
-        System.out.println("Last name:     " + emp.getLastName());
-        System.out.println("Mobile number: " + emp.getMobileNo());
-        System.out.println("Email:         " + emp.getEmail());
-        System.out.println("Joining date:  " + emp.getJoiningDate());
-        System.out.println("Active:        " + emp.isActive());
     }
 
     public static boolean saveToCSV(Employee emp) {

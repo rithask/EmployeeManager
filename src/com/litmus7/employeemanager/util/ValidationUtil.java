@@ -2,10 +2,11 @@ package com.litmus7.employeemanager.util;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ValidationUtil {
 
-    private static ArrayList<Integer> ids = new ArrayList<>();
+    private static List<Integer> ids = new ArrayList<>();
 
     public static boolean validateId(int id) {
         boolean duplicate = ids.contains(id);
