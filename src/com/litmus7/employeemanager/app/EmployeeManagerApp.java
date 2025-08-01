@@ -1,8 +1,8 @@
 package com.litmus7.employeemanager.app;
 
-import com.litmus7.employeemanager.controller.*;
+import com.litmus7.employeemanager.controller.EmployeeController;
 import com.litmus7.employeemanager.dto.Employee;
-import com.litmus7.employeemanager.util.*;
+import com.litmus7.employeemanager.util.ValidationUtil;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
@@ -52,7 +52,9 @@ public class EmployeeManagerApp {
                     outputFile = scanner.nextLine();
 
                     if (controller.saveDataFromTextFileToCSV(inputFile, outputFile)) {
-                        System.out.println("Successfully saved to CSV file");
+                        System.out.println("Employee data saved to CSV file successfully");
+                    } else {
+                        System.out.println("Failed to save employee data");
                     }
                     break;
                 case 3:
@@ -136,8 +138,6 @@ public class EmployeeManagerApp {
             else System.out.println("Invalid input. Please enter true or false.");
         }
 
-        Employee emp = new Employee(id, firstName, lastName, mobileNo, email, joiningDate, activeStatus);
-
-        return emp;
+        return new Employee(id, firstName, lastName, mobileNo, email, joiningDate, activeStatus);
     }
 }
