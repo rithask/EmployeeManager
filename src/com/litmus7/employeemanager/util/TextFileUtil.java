@@ -9,15 +9,11 @@ import java.util.List;
 public class TextFileUtil {
 
     public static String[] readDataFromTextFile(String filename) {
-        List<String> lines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                lines.add(line);
-            }
+            return reader.lines().toArray(String[]::new);
         } catch (IOException e) {
-            System.out.println("Reading failed!");
+            System.err.println("Error reading from file: " + e.getMessage());
+            return new String[0];
         }
-        return lines.toArray(new String[lines.size()]);
     }
 }
