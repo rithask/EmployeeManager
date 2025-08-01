@@ -11,6 +11,9 @@ import java.util.Scanner;
 public class EmployeeManagerApp {
 
     public static void main(String[] args) {
+        String inputFile;
+        String outputFile;
+
         Scanner scanner = new Scanner(System.in);
         EmployeeController controller = new EmployeeController();
         int userChoice = 0;
@@ -22,12 +25,15 @@ public class EmployeeManagerApp {
             System.out.println("3. Enter your own data");
             System.out.println("4. Exit");
             System.out.print("Enter your choice: ");
-            userChoice = scanner.nextInt();
+            userChoice = Integer.parseInt(scanner.nextLine());
             System.out.println();
 
             switch (userChoice) {
                 case 1:
-                    List<Employee> employees = controller.getDataFromTextFile("employees.txt");
+                    System.out.print("Enter the name of input file: ");
+                    inputFile = scanner.nextLine();
+
+                    List<Employee> employees = controller.getDataFromTextFile(inputFile);
                     for (Employee emp : employees) {
                         System.out.println("ID:\t\t" + emp.getId());
                         System.out.println("First Name:\t" + emp.getFirstName());
@@ -40,13 +46,21 @@ public class EmployeeManagerApp {
                     }
                     break;
                 case 2:
-                    if (controller.saveDataFromTextFileToCSV("employees.txt", "employees.csv")) {
+                    System.out.print("Enter the name of input file: ");
+                    inputFile = scanner.nextLine();
+                    System.out.print("Enter the name of output file: ");
+                    outputFile = scanner.nextLine();
+
+                    if (controller.saveDataFromTextFileToCSV(inputFile, outputFile)) {
                         System.out.println("Successfully saved to CSV file");
                     }
                     break;
                 case 3:
+                    System.out.print("Enter the name of output file: ");
+                    outputFile = scanner.nextLine();
+
                     Employee emp = readDataFromUser();
-                    controller.saveDataToCSV("employees.csv", emp);
+                    controller.saveDataToCSV(outputFile, emp);
                     break;
                 case 4:
                     System.out.println("Exiting...");
