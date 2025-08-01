@@ -25,7 +25,14 @@ public class EmployeeManagerApp {
             System.out.println("3. Enter your own data");
             System.out.println("4. Exit");
             System.out.print("Enter your choice: ");
-            userChoice = Integer.parseInt(scanner.nextLine());
+
+            try {
+                userChoice = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a number between 1 and 4.");
+                continue;
+            }
+
             System.out.println();
 
             switch (userChoice) {
@@ -61,23 +68,25 @@ public class EmployeeManagerApp {
                     System.out.print("Enter the name of output file: ");
                     outputFile = scanner.nextLine();
 
-                    Employee emp = readDataFromUser();
-                    controller.saveDataToCSV(outputFile, emp);
+                    Employee emp = readDataFromUser(scanner);
+                    if (controller.saveDataToCSV(outputFile, emp)) {
+                        System.out.println("Employee data saved to CSV file successfully");
+                    } else {
+                        System.out.println("Failed to save employee data");
+                    }
                     break;
                 case 4:
                     System.out.println("Exiting...");
                     break;
                 default:
-                    System.out.println("Invalid choice");
+                    System.out.println("Invalid choice. Please enter a number between 1 and 4.");
             }
         }
 
         scanner.close();
     }
 
-    private static Employee readDataFromUser() {
-        Scanner sc = new Scanner(System.in);
-
+    private static Employee readDataFromUser(Scanner sc) {
         int id = 0;
         do {
             System.out.print("Enter the ID: ");
@@ -129,12 +138,12 @@ public class EmployeeManagerApp {
             }
         } while (!ValidationUtil.validateJoiningDate(joiningDate));
 
-        boolean activeStatus = null;
+        Boolean activeStatus = null;
         while (activeStatus == null) {
             System.out.print("Is the employee active (true/false): ");
-            String input = scanner.nextLine();
+            String input = sc.nextLine().trim().toLowerCase();
             if (input.equals("true")) activeStatus = true;
-            else if (input.equals("false")) activeStatus = fales;
+            else if (input.equals("false")) activeStatus = false;
             else System.out.println("Invalid input. Please enter true or false.");
         }
 
