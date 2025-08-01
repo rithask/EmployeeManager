@@ -3,7 +3,6 @@ package com.litmus7.employeemanager.app;
 import com.litmus7.employeemanager.controller.*;
 import com.litmus7.employeemanager.dto.Employee;
 import com.litmus7.employeemanager.util.*;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.List;
@@ -15,7 +14,7 @@ public class EmployeeManagerApp {
         Scanner scanner = new Scanner(System.in);
         EmployeeController controller = new EmployeeController();
         int userChoice = 0;
-        
+
         while (userChoice != 4) {
             System.out.println();
             System.out.println("1. Read data from text file and print");
@@ -42,7 +41,7 @@ public class EmployeeManagerApp {
                     break;
                 case 2:
                     if (controller.saveDataFromTextFileToCSV("employees.txt", "employees.csv")) {
-                        System.out.println("Successfully added to CSV file");
+                        System.out.println("Successfully saved to CSV file");
                     }
                     break;
                 case 3:

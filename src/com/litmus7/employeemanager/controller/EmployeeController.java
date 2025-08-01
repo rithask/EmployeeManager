@@ -18,7 +18,6 @@ public class EmployeeController {
         List<Employee> employees = new ArrayList<>();
 
         for (String s : fileContent) {
-
             String[] fields = s.split("\\$");
 
             int id = Integer.parseInt(fields[0].trim());
@@ -51,13 +50,26 @@ public class EmployeeController {
     public boolean saveDataToCSV(String outputFile, Employee emp) {
         File f = new File(outputFile);
         boolean fileExists = f.isFile();
-        
+
         try (PrintWriter pw = new PrintWriter(new FileWriter(f, true))) {
             if (!fileExists) {
                 pw.println("ID,First Name,Last Name,Mobile Number,Email,Joining Date,Active Status");
             }
 
-            String dataToAppend = emp.getId() + "," + emp.getFirstName() + "," + emp.getLastName() + "," + emp.getMobileNo() + "," + emp.getEmail() + "," + emp.getJoiningDate() + "," + emp.isActive();
+            String dataToAppend =
+                emp.getId() +
+                "," +
+                emp.getFirstName() +
+                "," +
+                emp.getLastName() +
+                "," +
+                emp.getMobileNo() +
+                "," +
+                emp.getEmail() +
+                "," +
+                emp.getJoiningDate() +
+                "," +
+                emp.isActive();
             pw.println(dataToAppend);
 
             return true;
