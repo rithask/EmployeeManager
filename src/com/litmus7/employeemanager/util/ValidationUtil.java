@@ -1,35 +1,40 @@
 package com.litmus7.employeemanager.util;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ValidationUtil {
 
-    private static List<Integer> ids = new ArrayList<>();
+    private static final Set<Integer> usedIds = new HashSet<>();
 
     public static boolean validateId(int id) {
-        boolean duplicate = ids.contains(id);
-        if (!duplicate) {
-            ids.add(id);
+        if (id <= 0 || usedIds.contains(id)) {
+            return false;
         }
-
-        return id > 0 && !duplicate;
+        usedIds.add(id);
+        return true;
     }
 
     public static boolean validateName(String name) {
-        return !name.isBlank();
+        return name != null && !name.isBlank() && name.matches("^[A-za-z\\s'-]{2,50}$");
     }
 
     public static boolean validateEmail(String email) {
-        return email.matches("^((?!\\.)[\\w\\-_.]*[^.])(@\\w+)(.com)$") && !email.isBlank();
+        if (email == null || email.isBlank()) return false;
+        return email.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.(com|in|org|net)$");
     }
 
     public static boolean validateMobileNo(Long number) {
-        return String.valueOf(number).length() == 10 && number > 0;
+        if (number == null) return false;
+        String str = String.valueOf(number);
+        return str.matches("^[1-9][0-9]{9}$");
     }
 
     public static boolean validateJoiningDate(LocalDate date) {
-        return date != null && date.isAfter(LocalDate.parse("2009-06-30")) && date.isBefore(LocalDate.now());
+        if (date == null) return false;
+        LocalDate lowerBound = LocalDate.of(2009, 7, 1);
+        LocalDate today = LocalDate.now();
+        return date.isAfter(lowerBound) && date.isBefore(today);
     }
 }
