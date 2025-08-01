@@ -127,8 +127,14 @@ public class EmployeeManagerApp {
             }
         } while (!ValidationUtil.validateJoiningDate(joiningDate));
 
-        System.out.print("Is the employee active (true/false): ");
-        boolean activeStatus = Boolean.parseBoolean(sc.nextLine());
+        boolean activeStatus = null;
+        while (activeStatus == null) {
+            System.out.print("Is the employee active (true/false): ");
+            String input = scanner.nextLine();
+            if (input.equals("true")) activeStatus = true;
+            else if (input.equals("false")) activeStatus = fales;
+            else System.out.println("Invalid input. Please enter true or false.");
+        }
 
         Employee emp = new Employee(id, firstName, lastName, mobileNo, email, joiningDate, activeStatus);
 
