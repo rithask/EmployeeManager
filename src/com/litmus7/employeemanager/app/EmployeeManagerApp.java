@@ -11,8 +11,9 @@ import java.util.Scanner;
 public class EmployeeManagerApp {
 
     public static void main(String[] args) {
-        String inputFile;
-        String outputFile;
+        String inputFile = "employees.txt";
+        String outputFile = "employees.csv";
+        String userInput;
 
         Scanner scanner = new Scanner(System.in);
         EmployeeController controller = new EmployeeController();
@@ -37,8 +38,11 @@ public class EmployeeManagerApp {
 
             switch (userChoice) {
                 case 1:
-                    System.out.print("Enter the name of input file: ");
-                    inputFile = scanner.nextLine();
+                    System.out.print("Enter the name of input file (default: employees.txt): ");
+                    userInput = scanner.nextLine();
+                    if (!userInput.isEmpty()) {
+                        inputFile = userInput;
+                    }
 
                     List<Employee> employees = controller.getDataFromTextFile(inputFile);
                     for (Employee emp : employees) {
@@ -53,10 +57,16 @@ public class EmployeeManagerApp {
                     }
                     break;
                 case 2:
-                    System.out.print("Enter the name of input file: ");
-                    inputFile = scanner.nextLine();
-                    System.out.print("Enter the name of output file: ");
-                    outputFile = scanner.nextLine();
+                    System.out.print("Enter the name of input file (default: employees.txt): ");
+                    userInput = scanner.nextLine();
+                    if (!userInput.isEmpty()) {
+                        inputFile = userInput;
+                    }
+                    System.out.print("Enter the name of output file (default: employees.csv): ");
+                    userInput = scanner.nextLine();
+                    if (!userInput.isEmpty()) {
+                        outputFile = userInput;
+                    }
 
                     if (controller.saveDataFromTextFileToCSV(inputFile, outputFile)) {
                         System.out.println("Employee data saved to CSV file successfully");
@@ -65,8 +75,11 @@ public class EmployeeManagerApp {
                     }
                     break;
                 case 3:
-                    System.out.print("Enter the name of output file: ");
-                    outputFile = scanner.nextLine();
+                    System.out.print("Enter the name of output file (default: employees.csv): ");
+                    userInput = scanner.nextLine();
+                    if (!userInput.isEmpty()) {
+                        outputFile = userInput;
+                    }
 
                     Employee emp = readDataFromUser(scanner);
                     if (controller.saveDataToCSV(outputFile, emp)) {
