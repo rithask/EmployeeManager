@@ -11,9 +11,8 @@ import java.util.Scanner;
 public class EmployeeManagerApp {
 
     public static void main(String[] args) {
-        String inputFile = "employees.txt";
-        String outputFile = "employees.csv";
-        String userInput;
+        String inputFile;
+        String outputFile;
 
         Scanner scanner = new Scanner(System.in);
         EmployeeController controller = new EmployeeController();
@@ -38,11 +37,8 @@ public class EmployeeManagerApp {
 
             switch (userChoice) {
                 case 1:
-                    System.out.print("Enter the name of input file (default: employees.txt): ");
-                    userInput = scanner.nextLine();
-                    if (!userInput.isEmpty()) {
-                        inputFile = userInput;
-                    }
+                    System.out.print("Enter the name of input file: ");
+                    inputFile = scanner.nextLine();
 
                     List<Employee> employees = controller.getDataFromTextFile(inputFile);
                     for (Employee emp : employees) {
@@ -57,16 +53,10 @@ public class EmployeeManagerApp {
                     }
                     break;
                 case 2:
-                    System.out.print("Enter the name of input file (default: employees.txt): ");
-                    userInput = scanner.nextLine();
-                    if (!userInput.isEmpty()) {
-                        inputFile = userInput;
-                    }
-                    System.out.print("Enter the name of output file (default: employees.csv): ");
-                    userInput = scanner.nextLine();
-                    if (!userInput.isEmpty()) {
-                        outputFile = userInput;
-                    }
+                    System.out.print("Enter the name of input file: ");
+                    inputFile = scanner.nextLine();
+                    System.out.print("Enter the name of output file: ");
+                    outputFile = scanner.nextLine();
 
                     if (controller.saveDataFromTextFileToCSV(inputFile, outputFile)) {
                         System.out.println("Employee data saved to CSV file successfully");
@@ -75,11 +65,8 @@ public class EmployeeManagerApp {
                     }
                     break;
                 case 3:
-                    System.out.print("Enter the name of output file (default: employees.csv): ");
-                    userInput = scanner.nextLine();
-                    if (!userInput.isEmpty()) {
-                        outputFile = userInput;
-                    }
+                    System.out.print("Enter the name of output file: ");
+                    outputFile = scanner.nextLine();
 
                     Employee emp = readDataFromUser(scanner);
                     if (controller.saveDataToCSV(outputFile, emp)) {
@@ -123,11 +110,11 @@ public class EmployeeManagerApp {
             lastName = sc.nextLine();
         } while (!ValidationUtil.validateName(lastName));
 
-        Long mobileNo = 0L;
+        String mobileNo = null;
         do {
             System.out.print("Enter the 10-digit mobile number: ");
             try {
-                mobileNo = Long.parseLong(sc.nextLine());
+                mobileNo = sc.nextLine();
             } catch (NumberFormatException e) {
                 System.out.println("Mobile number should only consist of digits");
                 continue;

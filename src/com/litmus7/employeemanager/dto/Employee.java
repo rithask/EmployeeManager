@@ -7,7 +7,7 @@ public class Employee {
     private int id;
     private String firstName;
     private String lastName;
-    private Long mobileNo;
+    private String mobileNo;
     private String email;
     private LocalDate joiningDate;
     private boolean active;
@@ -18,7 +18,7 @@ public class Employee {
         int id,
         String firstName,
         String lastName,
-        Long mobileNo,
+        String mobileNo,
         String email,
         LocalDate joiningDate,
         boolean active
@@ -44,7 +44,7 @@ public class Employee {
         return this.lastName;
     }
 
-    public Long getMobileNo() {
+    public String getMobileNo() {
         return this.mobileNo;
     }
 
@@ -72,7 +72,7 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public void setMobileNo(Long mobileNo) {
+    public void setMobileNo(String mobileNo) {
         this.mobileNo = mobileNo;
     }
 

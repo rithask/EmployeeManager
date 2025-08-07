@@ -23,7 +23,7 @@ public class EmployeeController {
             int id = Integer.parseInt(fields[0].trim());
             String firstName = fields[1].trim();
             String lastName = fields[2].trim();
-            long mobileNo = Long.parseLong(fields[3].trim());
+            String mobileNo = fields[3].trim();
             String email = fields[4].trim();
             LocalDate joiningDate = LocalDate.parse(fields[5].trim());
             boolean active = Boolean.parseBoolean(fields[6].trim());
