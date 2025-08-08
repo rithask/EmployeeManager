@@ -46,14 +46,7 @@ public class EmployeeManagerApp {
 
                     List<Employee> employees = controller.getDataFromTextFile(inputFile);
                     for (Employee emp : employees) {
-                        System.out.println("ID:\t\t" + emp.getId());
-                        System.out.println("First Name:\t" + emp.getFirstName());
-                        System.out.println("Last Name:\t" + emp.getLastName());
-                        System.out.println("Mobile Number:\t" + emp.getMobileNo());
-                        System.out.println("Email Address:\t" + emp.getEmail());
-                        System.out.println("Joining Date:\t" + emp.getJoiningDate());
-                        System.out.println("Active Status:\t" + emp.isActive());
-                        System.out.println("------------------------------------");
+                        printEmployeeData(emp);
                     }
                     break;
                 case 2:
@@ -161,5 +154,16 @@ public class EmployeeManagerApp {
         }
 
         return new Employee(id, firstName, lastName, mobileNo, email, joiningDate, activeStatus);
+    }
+
+    private static void printEmployeeData(Employee emp) {
+        System.out.println("ID:\t\t" + emp.getId());
+        System.out.println("First Name:\t" + emp.getFirstName());
+        System.out.println("Last Name:\t" + emp.getLastName());
+        System.out.println("Mobile Number:\t" + emp.getMobileNo());
+        System.out.println("Email Address:\t" + emp.getEmail());
+        System.out.println("Joining Date:\t" + emp.getJoiningDate());
+        System.out.println("Active Status:\t" + emp.isActive());
+        System.out.println("------------------------------------");
     }
 }
