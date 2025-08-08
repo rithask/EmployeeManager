@@ -111,7 +111,12 @@ public class EmployeeManagerApp {
                 case 8:
                     System.out.print("Enter the id of the employee you want to delete: ");
                     int idToDelete = Integer.parseInt(scanner.nextLine());
-                    EmployeeDAO.deleteEmployee(idToDelete);
+                    System.out.print("Are you sure you want to delete this employee? (y/n): ");
+                    if (scanner.nextLine().trim().equalsIgnoreCase("y")) {
+                        EmployeeDAO.deleteEmployee(idToDelete);
+                    } else {
+                        System.out.println("Deletion cancelled.");
+                    }
                     break;
                 case 9:
                     System.out.println("Exiting...");
