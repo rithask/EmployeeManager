@@ -97,7 +97,11 @@ public class EmployeeManagerApp {
                     System.out.print("Enter the id of the employee: ");
                     int idToFetch = Integer.parseInt(scanner.nextLine());
                     Employee e = EmployeeDAO.getEmployeeById(idToFetch);
-                    printEmployeeData(e);
+                    if (e != null) {
+                        printEmployeeData(e);
+                    } else {
+                        System.out.println("Employee not found.");
+                    }
                     break;
                 case 6:
                     Employee emp2 = readDataFromUser(scanner);
