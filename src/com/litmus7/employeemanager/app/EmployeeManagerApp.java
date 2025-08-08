@@ -1,6 +1,7 @@
 package com.litmus7.employeemanager.app;
 
 import com.litmus7.employeemanager.controller.EmployeeController;
+import com.litmus7.employeemanager.dao.EmployeeDAO;
 import com.litmus7.employeemanager.dto.Employee;
 import com.litmus7.employeemanager.util.ValidationUtil;
 import java.time.LocalDate;
@@ -19,18 +20,23 @@ public class EmployeeManagerApp {
         EmployeeController controller = new EmployeeController();
         int userChoice = 0;
 
-        while (userChoice != 4) {
+        while (userChoice != 9) {
             System.out.println();
             System.out.println("1. Read data from text file and print");
             System.out.println("2. Save data to CSV file");
             System.out.println("3. Enter your own data");
-            System.out.println("4. Exit");
+            System.out.println("4. Get all employees");
+            System.out.println("5. Get one employee");
+            System.out.println("6. Add an employee");
+            System.out.println("7. Update an employee");
+            System.out.println("8. Delete an employee");
+            System.out.println("9. Exit");
             System.out.print("Enter your choice: ");
 
             try {
                 userChoice = Integer.parseInt(scanner.nextLine());
             } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a number between 1 and 4.");
+                System.out.println("Invalid input. Please enter a number between 1 and 9.");
                 continue;
             }
 
@@ -82,6 +88,32 @@ public class EmployeeManagerApp {
                     }
                     break;
                 case 4:
+                    List<Employee> employeees = EmployeeDAO.getAllEmployees();
+                    for (Employee e : employeees) {
+                        printEmployeeData(e);
+                    }
+                    break;
+                case 5:
+                    System.out.print("Enter the id of the employee: ");
+                    int idToFetch = Integer.parseInt(scanner.nextLine());
+                    Employee e = EmployeeDAO.getEmployeeById(idToFetch);
+                    printEmployeeData(e);
+                    break;
+                case 6:
+                    Employee emp2 = readDataFromUser(scanner);
+                    EmployeeDAO.createEmployee(emp2);
+                    break;
+                case 7:
+                    System.out.println("Enter the details of employee you want to update...");
+                    Employee emp3 = readDataFromUser(scanner);
+                    EmployeeDAO.updateEmployee(emp3);
+                    break;
+                case 8:
+                    System.out.print("Enter the id of the employee you want to delete: ");
+                    int idToDelete = Integer.parseInt(scanner.nextLine());
+                    EmployeeDAO.deleteEmployee(idToDelete);
+                    break;
+                case 9:
                     System.out.println("Exiting...");
                     break;
                 default:
