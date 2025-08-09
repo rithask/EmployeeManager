@@ -18,6 +18,7 @@ public class EmployeeManagerApp {
 
         Scanner scanner = new Scanner(System.in);
         EmployeeController controller = new EmployeeController();
+        EmployeeDAO employeeDAO = new EmployeeDAO();
         int userChoice = 0;
 
         while (userChoice != 9) {
@@ -88,7 +89,7 @@ public class EmployeeManagerApp {
                     }
                     break;
                 case 4:
-                    List<Employee> employeees = EmployeeDAO.getAllEmployees();
+                    List<Employee> employeees = employeeDAO.getAllEmployees();
                     for (Employee e : employeees) {
                         printEmployeeData(e);
                     }
@@ -96,7 +97,7 @@ public class EmployeeManagerApp {
                 case 5:
                     System.out.print("Enter the id of the employee: ");
                     int idToFetch = Integer.parseInt(scanner.nextLine());
-                    Employee e = EmployeeDAO.getEmployeeById(idToFetch);
+                    Employee e = employeeDAO.getEmployeeById(idToFetch);
                     if (e != null) {
                         printEmployeeData(e);
                     } else {
@@ -105,19 +106,19 @@ public class EmployeeManagerApp {
                     break;
                 case 6:
                     Employee emp2 = readDataFromUser(scanner);
-                    EmployeeDAO.createEmployee(emp2);
+                    employeeDAO.createEmployee(emp2);
                     break;
                 case 7:
                     System.out.println("Enter the details of employee you want to update...");
                     Employee emp3 = readDataFromUser(scanner);
-                    EmployeeDAO.updateEmployee(emp3);
+                    employeeDAO.updateEmployee(emp3);
                     break;
                 case 8:
                     System.out.print("Enter the id of the employee you want to delete: ");
                     int idToDelete = Integer.parseInt(scanner.nextLine());
                     System.out.print("Are you sure you want to delete this employee? (y/n): ");
                     if (scanner.nextLine().trim().equalsIgnoreCase("y")) {
-                        EmployeeDAO.deleteEmployee(idToDelete);
+                        employeeDAO.deleteEmployee(idToDelete);
                     } else {
                         System.out.println("Deletion cancelled.");
                     }
