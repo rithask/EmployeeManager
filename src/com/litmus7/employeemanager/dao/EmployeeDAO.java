@@ -22,7 +22,7 @@ public class EmployeeDAO {
         "UPDATE employees SET first_name = ?, last_name = ?, mobile_number = ?, email = ?, joining_date = ?, active_status = ? WHERE id = ?";
     private static final String DELETE_EMPLOYEE = "DELETE FROM employees WHERE id = ?";
 
-    public static boolean createEmployee(Employee emp) {
+    public boolean createEmployee(Employee emp) {
         try (
             Connection connection = DatabaseConnectionUtil.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_EMPLOYEE)
@@ -43,7 +43,7 @@ public class EmployeeDAO {
         return true;
     }
 
-    public static List<Employee> getAllEmployees() {
+    public List<Employee> getAllEmployees() {
         List<Employee> employees = new ArrayList<>();
         try (
             Connection connection = DatabaseConnectionUtil.getConnection();
@@ -70,7 +70,7 @@ public class EmployeeDAO {
         return employees;
     }
 
-    public static Employee getEmployeeById(int id) {
+    public Employee getEmployeeById(int id) {
         try (
             Connection connection = DatabaseConnectionUtil.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ONE_EMPLOYEE)
@@ -95,7 +95,7 @@ public class EmployeeDAO {
         return null;
     }
 
-    public static boolean updateEmployee(Employee emp) {
+    public boolean updateEmployee(Employee emp) {
         try (
             Connection connection = DatabaseConnectionUtil.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_EMPLOYEE)
@@ -115,7 +115,7 @@ public class EmployeeDAO {
         }
     }
 
-    public static boolean deleteEmployee(int id) {
+    public boolean deleteEmployee(int id) {
         try (
             Connection connection = DatabaseConnectionUtil.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_EMPLOYEE)
